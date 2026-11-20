@@ -1,9 +1,9 @@
 #import "@preview/charged-ieee:0.1.4": ieee
 
 #show: ieee.with(
-  title: [Optimizing Fixed-Time 2-Stage Traffic Signal Control with the AWoC GA Approach],
+  title: [Optimizing Offsets in Fixed-Time 2-Stage Traffic Signal Control with the WoAC GA Approach],
   abstract: [
-    The process of scientific writing is often tangled up with the intricacies of typesetting, leading to frustration and wasted time for researchers. In this paper, we introduce Typst, a new typesetting system designed specifically for scientific writing. Typst untangles the typesetting process, allowing researchers to compose papers faster. In a series of experiments we demonstrate that Typst offers several advantages, including faster document creation, simplified syntax, and increased ease-of-use.
+    Optimizing offsets for intersections in the sytems of traffic lights is a multiple-convex NP-Hard problem.
   ],
   authors: (
     (
@@ -28,15 +28,58 @@
 
 = Introduction
 
-Scientific writing is a crucial part of the research process, allowing researchers to share their findings with the wider scientific community. However, the process of typesetting scientific documents can often be a frustrating and time-consuming affair, particularly when using outdated tools such as LaTeX. Despite being over 30 years old, it remains a popular choice for scientific writing due to its power and flexibility. However, it also comes with a steep learning curve, complex syntax, and long compile times, leading to frustration and despair for many researchers @netwok2020 @netwok2022. adskfjdlkjs @bhattacharyyaSystematicReviewEvolutionary2026.      
+- What is traffic signal control?
+- Why is traffic signal control relevant?
+
+  - problems and potential improvement
+- Why is a genetic algorithm a good choice
+- Cycle time & Splits @urbanik2015signal
+- Our current GA implementation @chanOptimisationFixedTimeSignal1999
+  - How do we know we’re using the right GA implementation? Which GA implementations are there?
+- Could approach it from the angle that a lot of distributed techniques are tried, and this is an attempt to improve performance of any probabilistic swarm intelligence algorithm with a simple AWoC aggregation
+
+  - A bit iffy though, considering that it would require a lot of resources. Is WoAC really beneficial? It requires like 10x independent computation. We run the same algorithm for different systems and combine guesses. What class of problems would that really be useful in?                           
 
 = Literature Review
 
+- TSC Solutions with GA: what has been tried before. What TRANSYT uses. Any applications at scale?
+- What’s the state of the research? Are we leaning more adaptive or static or actuated? How research compares to real world appplications and why? Has GA research has been exhausted?
+- Applications of GA. What types of problems GAs apply to
+- Alternatives to GAs
+
 = Proposed Approach
+
+== Problem Formulation
 
 = Experimental Results
 
 == Data
+
+All test data was generated using tools that are provided by SUMO. The network and traffic demand were created once with fixed settings and the same files were used for every simulation in the experiment.
+
+=== Road Network
+
+The road network is a 3x3 grid with traffic lights at every intersection generated using the Netgenerate tool. Intersection are named with a column letter and number from A0 to C2. The traffic lights alternate between green, yellow, and red phases. In SUMO, the traffic lights are controlled as one unit by the traffic light logic. The traffic light logic includes a list of phases that are written as a string of letters including G for green, y for yellow, and r for red.
+
+=== Traffic Demand
+
+The traffic demand was generated with the randomTrips.py Python script provided by SUMO. Vehicles are generated at the starting point of C0B0 every 3 seconds for the first simulated hour. All vehicles pass under intersection B0 and then follow a randomly generated path with a fixed seed to create identical road demand in each run of the simulation.      
+
+=== Data Files
+
+All files are in SUMO’s XML format. The road network is stored in grid.net.xml that stores the road lanes, intersections, traffic lights, and the starting traffic light plan.                                                                        
+
+- files: grid.net.xml, routes.rou.xml, trips.rou.xml
+
+- formats
+- what they are for
+
+  - grid: roads, edges, lights, traffic logic  
+
+  - routes: actual paths
+
+  - trips: start, end time, start location, destination    
+- how we utilized them
 
 == Results
 
