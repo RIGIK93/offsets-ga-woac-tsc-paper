@@ -3,7 +3,7 @@
 #show: ieee.with(
   title: [Optimizing Offsets in Fixed-Time 2-Stage Traffic Signal Control with the WoAC GA Approach],
   abstract: [
-    Optimizing offsets for intersections in the sytems of traffic lights is a multiple-convex NP-Hard problem.
+    Traffic Signal Control is a multiple-convex NP-Hard optimization problem. Conventional swarm, distributed and mixed methods have been applied in an attempt to efficiently reduce delay, emissions and number of stops for vehicles in both urban and rural settings. We applied a binary genetic algorithm to assign offsets for each intersection in a network of traffic lights in order to adapt to the historical data simulated with SUMO software. Additionally, we applied the Wisdom of Artificial Crowds (WoAC), a swarm-based, nature-inspired metaheuristic in order to attempt to both improve and parallelize the genetic algorithm. We find WoAC to provide no imporvement to the Binary GAs outcomes with the set up explored in this paper; however, we still find the methodology and experimental design a useful starting point for the application of WoAC to improve existing TSC algorithms.
   ],
   authors: (
     (
@@ -28,7 +28,15 @@
 
 = Introduction
 
-There’s broad consensus in the field of Traffic Signal Control research that mere installation of adaptive systems that adjust the timings of traffic lights in an area in a coordinated manner have potential to meaningfully reduce vehicle delay and emissions with some algorithms and techiques reporting the estimates in the range of $10percent$ to $30percent$ in simulated environments @petersReducingCarbonEmissions2009 @abidAIEnhancedTrafficSignal2026 @sakaza2025leveraging. Genetic algorithm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+There’s broad consensus in the field of Traffic Signal Control research that mere installation of adaptive systems that adjust the timings of traffic lights in an area in a coordinated manner have potential to meaningfully reduce vehicle delay and emissions with some algorithms and techiques reporting the estimates in the range of $10percent$ to $30percent$ in simulated environments @petersReducingCarbonEmissions2009 @abidAIEnhancedTrafficSignal2026 #ref(<sakaza2025leveraging>)\. On the contrary, the overwhelming majority of municipalities in the United States still rely on the traditional fixed-time or actuated systems *(CITE SOME SURVEY ON THE STATE OF SYSTEM MODERNIZATION)*.
+
+A traffic signal control problem is a multiple-convex *(SOURCE THAT STATES MULTIPLE-CONVEX)* NP-hard *(SOURCE THAT PROVES NP-HARD)* optimization problem whose goal is to reduce traffic congestion @bhattacharyyaSystematicReviewEvolutionary2026. The problem aims to answer the following question: how to tune the timings of traffic signals in a road network so that the system as a whole provides the greatest safety, traffic throughput, the least emissions and car stops @bhattacharyyaSystematicReviewEvolutionary2026? This can be expressed with a formula as
+
+$ "Genral formula given in the systematic review thing" $
+
+esome  
+
+s
 
 - What is traffic signal control?
 
@@ -43,8 +51,11 @@ There’s broad consensus in the field of Traffic Signal Control research that m
 
   - A bit iffy though, considering that it would require a lot of resources. Is WoAC really beneficial? It requires like 10x independent computation. We run the same algorithm for different systems and combine guesses. What class of problems would that really be useful in?
 - Websters as the early choice @tekluGeneticAlgorithmApproach2007
+- 
 
 = Literature Review
+
+Genetic Algorithms have been applied extensively to solving TSC, both for real-time and fixed-time optimization. The versatility of genetic algorithms as a meta-heuristic   permits their utilization to optimize all aspects of TSC @yampolskiyWisdomArtificialCrowds2012. Some approaches use a single genetic algorithms to optimize boths the offsets and cycle lengths and cycle tims of individual intersections in fixed-time settings @chanOptimisationFixedTimeSignal1999 #ref(<tekluGeneticAlgorithmApproach2007>). Some approaches deviate from the traditional cycle model devised by Webster@WebsterMethodTraffic and use models such as Cell Transmission Models @loDynamicNetworkTraffic2001. We find these models to complex for the research question of studying the effects of WoAC on GA TSC, so for our purposes a simple Binary GA models suficies.                                                                                                                                                                                              
 
 - TSC Solutions with GA: what has been tried before. What TRANSYT uses. Any applications at scale?
 - What’s the state of the research? Are we leaning more adaptive or static or actuated? How research compares to real world appplications and why? Has GA research has been exhausted?
@@ -75,14 +86,34 @@ All files are in SUMO’s XML format. The road network is stored in grid.net.xml
 
 === Generating Instances
 
-This process generates a new test case when settings such as grid size, number of vehicles, random seed, or starting edge are changed.
+This process generates a new test case when settings such as grid size, number of vehicles, random seed, or starting edge are changed.  
 
 === Experiment Setup
 
-All experiments    
+All experiments were run on a laptop with an AMD Ryzen 7 7840HS (8 cores, 16 threads) and 16 GB of RAM, running Ubuntu 26.04.1 LTS with Python 3.14.4 and Eclipse SUMO 1.28.0. The experiments used the GA parameters listed in Table I.    
+
+#figure(
+  table(
+    columns: 2,
+    align: (left, auto),
+    stroke: none,
+    table.hline(),
+    table.header([Parameter], [Setting]),
+    table.hline(),
+    [Chromosome], [72 bits (8 bits x 9 intersections)],
+    [Offset formula], [offset = gene x C_max / 255],
+    [Fitness], [Average time loss per vehicle],
+    [Population size], [100],
+    [Selection], [Tournament, size 3],
+    [Crossover], [Uniform],
+    [Mutation], [0\.01 per light (part of the gene is re-randomized)],
+    [Generations], [50],
+    [GA runs], [10],
+    [Worker processes], [14],
+    table.hline(),
+  ),
+) <texpile-table-98b3a00cf56d>
 
 == Results
 
 = Conclusions
-
-= Acknowledgements
