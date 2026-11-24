@@ -3,7 +3,7 @@
 #show: ieee.with(
   title: [Optimizing Offsets in Fixed-Time 2-Stage Traffic Signal Control with the WoAC GA Approach],
   abstract: [
-    Traffic Signal Control is a multiple-convex NP-Hard optimization problem. Previously, genetic algorithms, conventional swarm, distributed and mixed methods have been applied in an attempt to efficiently reduce delay, emissions and number of stops for vehicles in both urban and rural settings. We applied a binary genetic algorithm to assign offsets for each intersection in a network of traffic lights in order to adapt to the historical data simulated with SUMO software. Additionally, we applied the Wisdom of Artificial Crowds (WoAC), a swarm-based, nature-inspired meta-heuristic in order to attempt to both improve and parallelize the genetic algorithm. We find WoAC to provide no improvement to the Binary GAs outcomes with the set up explored in this paper; however, we still find the methodology and experimental design a useful starting point for the application of WoAC to improve existing TSC algorithms.
+    Traffic Signal Control is a multiple-convex NP-Hard optimization problem. Previously, genetic algorithms, conventional swarm, distributed and mixed methods have been applied in an attempt to efficiently reduce delay, emissions and number of stops for vehicles in both urban and rural settings. We applied a binary genetic algorithm to assign offsets for each intersection in a network of traffic lights in order to adapt to the historical data simulated with the SUMO software. Additionally, we applied the Wisdom of Artificial Crowds (WoAC), a swarm-based, nature-inspired meta-heuristic in order to attempt to both improve and parallelize the genetic algorithm. We find WoAC to provide no improvement to the Binary GAs outcomes with the set up explored in this paper; however, we still find the methodology and experimental design a useful starting point for the application of WoAC for TSC problems.
   ],
   authors: (
     (
@@ -150,7 +150,7 @@ All experiments were run on a laptop with an AMD Ryzen 7 7840HS (8 cores, 16 thr
   ),
 ) <texpile-table-98b3a00cf56d>
 
-#figure(image("images/pasted-image-fc062a06.png"), caption: [SUMO-GUI view of the 3x3 road network.]) <texpile-fig-f7ff7b66b334>
+#figure(image("images/pasted-image-fc062a06.png", width: 80%), caption: [SUMO-GUI view of the 3x3 road network.]) <texpile-fig-f7ff7b66b334>
 
 == Results
 
